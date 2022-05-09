@@ -1,0 +1,72 @@
+---
+title: "STA 308 Final"
+author: "Olivia Bickford"
+date: "5/8/2022"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+This is the Python code for the Final midterm.
+By taking the unemployment data from March 2021 to March 2022, census regions and the 
+state maps data I found the mean and standard deviation for the differences in state unemployment
+from March of 2021 to March of 2022. Using this I found the coefficient of variation
+for each census region which includes Northeast, Midwest, South, and West. 
+
+## Data Files
+
+```{r cars}
+census_data <- read.csv("censusRegions.csv")
+unemployment_data <- read.csv("marchStateUnemployment.csv") 
+state_mapping_data <- read.csv("state_abb_codes.csv")
+```
+
+
+## Unemployment Rate Analysis 
+
+
+```{r data analysis}
+updated_census_data <- census_data %>%
+  slice(-28)  ##update data to get rid of D.C
+updated_census_data
+
+updated_statedF <- merge(state_mapping_data, unemployment_data) ## merge two data sets with state name
+updated_statedF
+
+merged_regions_data <- merge(updated_statedF, updated_census_data,
+                     by.x= 'Code', by.y= 'State') ## take combined data and merge with state code
+merged_regions_data
+
+```
+
+
+## Final Table
+
+
+```{r final table}
+census_regions_data <- merged_regions_data %>% 
+  group_by(State) %>% # group by state first to find difference in rates 
+  mutate(difference_in_rates = March_21 - March_22) %>% #set up difference rate variable 
+  group_by(Region) %>%  # after the new variable group by the region to...
+  summarise (mean_of_diff = mean(difference_in_rates), ##find the mean difference 
+             sd_of_diff = sd(difference_in_rates), ## find the standard deviation of these means
+             CoV_ofdiff = (sd_of_diff/mean_of_diff)*100) #coefficient of variation using previous variable above
+
+census_regions_data
+```
+
+
+## Mapping Table
+
+
+| Functionality                                       | In R                                           | In Python                                         |
+|-----------------------------------------------------|------------------------------------------------|---------------------------------------------------|
+| Removed a row from a data frame                     | slice()                                        | DataFrame[DataFrame.column !=  'variable']        |
+| Merging two data frames  together                   | merge(df1, df2, by.x= "column" by.y= "column"  | df.merge(df1, left_on="column", right_on="column) |
+| Group data by a certain criteria                    | data %>% group_by(Column)                      | df.groupby('column')                              |
+| Make a new variable                                 | data %>% mutate(name = variable wanted)        | df.assign(name= variable wanted)                  |
+| Reduce data frame to a summary of  just one vector  | data %>% summarize(variable)                   | df.describe()                                     |
+| Rename columns                                      | data %>% rename(new name = existing variable ) | df.rename(columns= 'existing column':'new name')  |

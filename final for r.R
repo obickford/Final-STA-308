@@ -1,3 +1,17 @@
+#############
+##
+## Olivia Bickford
+## May 8, 2022
+##
+## This is the R final for STA 308. 
+## By taking the unemployment data from March 2021 to March 2022, census regions and the 
+##   state maps data I found the mean and standard deviation for the differences
+##   in state unemployment from March of 2021 to March of 2022. Using this I found 
+##   the coefficient of variation for each census region which includes Northeast, 
+##   Midwest, South, and West. 
+##
+
+
 ## load data
 census_data <- read.csv("censusRegions.csv")
 unemployment_data <- read.csv("marchStateUnemployment.csv") 

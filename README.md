@@ -7,7 +7,7 @@
   The West had the highest percentage of points dispersed around the mean of 2.15. This means that most of the rates of change of unemployment for the West region between 2021 and 2022 were around 2.15. The lowest, the South had only 31.64% of the points dispersed around the mean of 1.54. There was more variation with the unemployment rates in the South from 2021 to 2022. While the South was not the lowest mean, it ended up having the lowest coefficient of variation.
   
 
-TABLE
+Mapping Table is in Markdown file.
 
 
-Favorite Topic 
+My favorite topic this year was using data handling to form analysis from various data sets. My favorite was in Midterm take home 1 with using the baby names data set. It was interesting to see the names throughout the years and see what name was most common and where my name fell in the ranks. I liked strengthening my skills with the data handling. 
